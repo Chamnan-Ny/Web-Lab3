@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website - Courses</title>
+    <style>
+        /* ========== RESPONSIVE INFO BANNER (Educational) ========== */
+        .responsive-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 0.8rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .responsive-info::before {
+            content: "🖥️ DESKTOP MODE - 3 Cards Per Row";
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .responsive-info::before {
+                content: "📱 iPAD MODE - 2 Cards Per Row";
+            }
+        }
+
+        @media (max-width: 768px) {
+            .responsive-info::before {
+                content: "📱 MOBILE MODE - Cards Stacked Vertically (1 Per Row)";
+            }
+        }
+
+        /* ========== RESET & BASE STYLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* ========== FLEXBOX NAVIGATION BAR ========== */
+        .navbar {
+            background-color: #2c2c2c;
+            padding: 0.8rem 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.3rem 0.8rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            background-color: #444;
+            border-radius: 3px;
+        }
+
+        /* ========== MAIN CONTAINER ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #2c2c2c;
+        }
+
+        /* ========== CSS GRID FOR CARDS ========== */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        /* ========== CARD COMPONENT ========== */
+        .course-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #2c2c2c;
+            font-weight: bold;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background-color: #e8e8e8;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* ========== RESPONSIVE MEDIA QUERIES ========== */
+        
+        /* Desktop: 3 cards per row (default - above 1024px) */
+        
+        /* iPad/Tablet - 2 cards per row */
+        @media (max-width: 1024px) {
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile - 1 card per row (stacked vertically) */
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .page-title {
+                font-size: 1.6rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .card-image-wrapper {
+                height: 200px;
+            }
+
+            .card-content {
+                padding: 1.2rem;
+            }
+        }
+
+        /* Extra small mobile screens */
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1rem;
+            }
+
+            .nav-menu a {
+                font-size: 0.85rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .page-title {
+                font-size: 1.3rem;
+            }
+
+            .card-image-wrapper {
+                height: 180px;
+            }
+
+            .card-content {
+                padding: 1rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .card-description {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- FLEXBOX NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">My Website</a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        <h1 class="page-title">Our Courses</h1>
+
+        <!-- CSS GRID LAYOUT FOR CARDS -->
+        <div class="courses-grid">
+            
+            <!-- CARD 1 - Web Design -->
+            <div class="course-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=500&h=300&fit=crop" alt="Web Design" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Web Design</h3>
+                    <p class="card-description">Learn HTML and CSS basics.</p>
+                </div>
+            </div>
+
+            <!-- CARD 2 - JavaScript -->
+            <div class="course-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=500&h=300&fit=crop" alt="JavaScript" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">JavaScript</h3>
+                    <p class="card-description">Make your website interactive.</p>
+                </div>
+            </div>
+
+            <!-- CARD 3 - Responsive UI -->
+            <div class="course-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=500&h=300&fit=crop" alt="Responsive UI" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Responsive UI</h3>
+                    <p class="card-description">Build mobile-friendly layouts.</p>
+                </div>
+            </div>
+
+            <!-- CARD 4 - Frontend Development -->
+            <div class="course-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop" alt="Frontend Development" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Frontend Development</h3>
+                    <p class="card-description">Master modern web technologies.</p>
+                </div>
+            </div>
+
+            <!-- CARD 5 - React Framework -->
+            <div class="course-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=500&h=300&fit=crop" alt="React Framework" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">React Framework</h3>
+                    <p class="card-description">Build dynamic user interfaces.</p>
+                </div>
+            </div>
+
+            <!-- CARD 6 - CSS Grid & Flexbox -->
+            <div class="course-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?w=500&h=300&fit=crop" alt="CSS Grid & Flexbox" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">CSS Grid & Flexbox</h3>
+                    <p class="card-description">Advanced layout techniques.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2025 MyWebsite</p>
+    </footer>
+
+</body>
+</html>
